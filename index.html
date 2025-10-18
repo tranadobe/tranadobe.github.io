@@ -1,1 +1,355 @@
-day la trang chu
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Trần Đức Anh | FinTech Product & UX Architect</title>
+    <style>
+        :root {
+            --bg-color: #f0f2f5;
+            --text-primary: #1c1e21;
+            --text-secondary: #606770;
+            --accent-color: #007aff;
+            --card-bg: rgba(255, 255, 255, 0.65);
+            --card-border: rgba(0, 0, 0, 0.07);
+            --card-hover-border: rgba(0, 122, 255, 0.5);
+            --font-main: -apple-system, BlinkMacSystemFont, "Segoe UI", "Inter", Roboto, Helvetica, Arial, sans-serif;
+            --transition-speed: 0.5s;
+        }
+
+        *, *::before, *::after {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: var(--font-main);
+            background-color: var(--bg-color);
+            color: var(--text-primary);
+            font-size: 16px;
+            line-height: 1.6;
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
+            overflow-x: hidden;
+            position: relative;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 1.5rem;
+        }
+        
+        /* --- General Link Styling --- */
+        a {
+            color: var(--accent-color);
+            text-decoration: none;
+            font-weight: 500;
+            transition: color 0.3s ease;
+        }
+        a:hover {
+            color: var(--text-primary);
+        }
+
+        /* --- Hero Section --- */
+        .hero {
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            padding: 2rem 0;
+            will-change: opacity, transform;
+        }
+        
+        .hero .profile-picture {
+            width: 140px;
+            height: 140px;
+            border-radius: 50%;
+            object-fit: cover;
+            margin-bottom: 2rem;
+            border: 5px solid rgba(255, 255, 255, 0.9);
+            box-shadow: 0 15px 50px rgba(0, 0, 0, 0.1);
+            will-change: transform, opacity;
+        }
+
+        .hero h1 {
+            font-size: clamp(2.5rem, 6vw, 4.5rem);
+            font-weight: 800;
+            letter-spacing: -0.05em;
+            line-height: 1.05;
+            margin-bottom: 0.75rem;
+            background: linear-gradient(90deg, #333, #000);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .hero h2 {
+            font-size: clamp(1.1rem, 3vw, 1.5rem);
+            font-weight: 500;
+            color: var(--text-secondary);
+            margin-bottom: 2rem;
+            max-width: 600px;
+        }
+
+        .contact-bar {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            align-items: center;
+            gap: 10px 15px;
+            font-size: 0.9rem;
+            color: var(--text-secondary);
+        }
+
+        /* --- Bento Grid Layout --- */
+        .bento-grid {
+            padding: 100px 0;
+            display: grid;
+            grid-template-columns: repeat(6, 1fr);
+            grid-auto-rows: minmax(150px, auto);
+            gap: 1.5rem;
+        }
+
+        .bento-box {
+            background: var(--card-bg);
+            border: 1px solid var(--card-border);
+            border-radius: 28px;
+            padding: 32px;
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.05);
+            transition: transform var(--transition-speed) ease, box-shadow var(--transition-speed) ease, border-color var(--transition-speed) ease;
+            position: relative;
+            overflow: hidden;
+            
+            /* Scroll Animation setup */
+            opacity: 0;
+            transform: translateY(30px);
+            will-change: opacity, transform;
+        }
+
+        .bento-box.is-visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .bento-box:hover {
+            transform: translateY(-8px) scale(1.02);
+            box-shadow: 0 20px 50px rgba(0, 0, 0, 0.1);
+            border-color: var(--card-hover-border);
+        }
+        
+        .bento-box h3 {
+            font-size: 1.75rem;
+            font-weight: 700;
+            letter-spacing: -0.03em;
+            margin-bottom: 1.5rem;
+        }
+        
+        /* Grid item placements */
+        .summary { grid-column: span 6; }
+        .experience { grid-column: span 6; }
+        .portfolio { grid-column: span 6; }
+        .skills-pro { grid-column: span 2; }
+        .skills-tech { grid-column: span 2; }
+        .skills-soft { grid-column: span 2; }
+        .education { grid-column: span 6; }
+        
+        @media (max-width: 992px) {
+            .skills-pro, .skills-tech, .skills-soft { grid-column: span 3; }
+        }
+        
+        @media (max-width: 768px) {
+            body { font-size: 15px; }
+            .bento-grid { grid-template-columns: 1fr; }
+            .summary, .experience, .portfolio, .skills-pro, .skills-tech, .skills-soft, .education { grid-column: span 1; }
+        }
+
+        /* --- Content Specific Styling --- */
+        .summary p { font-size: 1.1rem; line-height: 1.8; color: var(--text-secondary); }
+
+        .experience-header { margin-bottom: 2rem; }
+        .experience-header h4 { font-size: 1.5rem; font-weight: 600; margin-bottom: 4px; }
+        .experience-header p { color: var(--text-secondary); }
+        .experience-category h5 { font-size: 1.1rem; font-weight: 600; margin: 1.5rem 0 1rem; padding-bottom: 0.5rem; border-bottom: 1px solid var(--card-border); }
+        .experience-category ul, .skills-soft ul { list-style: none; }
+        .experience-category li, .skills-soft li { padding-left: 20px; position: relative; margin-bottom: 0.5rem; }
+        .experience-category li::before, .skills-soft li::before { content: '→'; position: absolute; left: 0; color: var(--accent-color); }
+        
+        .portfolio .grid-layout, .education .grid-layout { display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 1rem; }
+        .portfolio-item, .education-item { background: rgba(0,0,0,0.03); padding: 1rem; border-radius: 16px; transition: background 0.3s ease; }
+        .portfolio-item:hover { background: rgba(0,0,0,0.06); }
+        .portfolio-item h4, .education-item h4 { font-size: 1rem; font-weight: 600; margin-bottom: 0.25rem; }
+        .portfolio-item p, .education-item p { font-size: 0.9rem; color: var(--text-secondary); }
+
+        .skills-pro p, .skills-tech p { font-size: 0.95rem; line-height: 1.7; color: var(--text-secondary); }
+
+        /* --- Footer --- */
+        footer {
+            text-align: center;
+            padding: 4rem 1.5rem;
+            color: var(--text-secondary);
+            font-size: 0.9rem;
+        }
+    </style>
+</head>
+<body>
+
+    <header class="hero container">
+        <img src="https://i.postimg.cc/c4kTnn1s/Screenshot-2025-10-17-at-23-02-16.png" alt="Ảnh chân dung Trần Đức Anh" class="profile-picture">
+        <h1>TRẦN ĐỨC ANH</h1>
+        <h2>PRODUCT OWNER & UI/UX DESIGN LEADER (FINTECH)</h2>
+        <div class="contact-bar">
+            <span><a href="tel:0905491910">0905491910</a></span>
+            <span>&bull;</span>
+            <span><a href="mailto:anhductran83@gmail.com">anhductran83@gmail.com</a></span>
+            <span>&bull;</span>
+            <span>Phú Đô, Nam Từ Liêm, Hà Nội</span>
+            <span>&bull;</span>
+            <span><a href="https://www.facebook.com/TAD.designer" target="_blank">Facebook</a></span>
+        </div>
+    </header>
+
+    <main class="container">
+        <div class="bento-grid">
+            
+            <!-- Tóm Tắt Chuyên Môn -->
+            <section id="summary" class="bento-box summary">
+                <h3>Tóm Tắt Chuyên Môn</h3>
+                <p>Chuyên gia Product & UI/UX FinTech với <strong>15 năm kinh nghiệm</strong> kiến trúc và dẫn dắt toàn bộ hệ sinh thái thanh toán (mPOS, Tingbox, Vimo). Tiên phong ứng dụng <strong>Generative A.I</strong> (Gemini, ChatGPT) vào toàn bộ quy trình R&D, giúp <strong>giảm ~30-40% thời gian nghiên cứu</strong> và <strong>tăng hiệu suất làm việc của đội ngũ lên ~50%</strong>.</p><br>
+                <p>Sở hữu khả năng thấu cảm và dự đoán hành vi người dùng vượt trội, cho phép thiết kế các luồng nghiệp vụ (user flow) đạt hiệu quả và tỷ lệ chấp nhận (adoption) cao ngay từ lần ra mắt đầu tiên, giảm thiểu tối đa vòng lặp tinh chỉnh (iteration) sau triển khai.</p>
+            </section>
+            
+            <!-- Kinh Nghiệm Lãnh Đạo -->
+            <section id="experience" class="bento-box experience">
+                 <div class="experience-header">
+                    <h4>Product Owner & UI/UX Design Leader</h4>
+                    <p>CÔNG TY CỔ PHẦN NEXTPAY | Hà Nội | 2010 – Hiện tại</p>
+                </div>
+                <div class="experience-content">
+                    <div class="experience-category">
+                        <h5>Lãnh đạo & Phát triển Sản phẩm</h5>
+                        <ul>
+                            <li>Dẫn dắt chiến lược, lộ trình (roadmap) và phát triển tính năng cho các sản phẩm nòng cốt: <a href="https://mpos.vn" target="_blank">mPOS.vn</a>, <a href="https://tingbox.vn" target="_blank">Tingbox.vn</a>, Vimo.vn, và <a href="https://payon.vn" target="_blank">PayOn.vn</a>.</li>
+                            <li>Thiết kế và tối ưu hóa luồng thanh toán Click to pay, tăng CR ~15-20%.</li>
+                            <li>Thiết kế UI/UX và quản lý vòng đời ứng dụng <a href="https://play.google.com/store/apps/details?id=com.vimo.mpos" target="_blank">mPOS digital</a>.</li>
+                        </ul>
+                    </div>
+                    <div class="experience-category">
+                        <h5>Tiên phong Ứng dụng A.I (A.I Leadership)</h5>
+                        <ul>
+                            <li>Xây dựng hệ thống Trợ lý Master A.I để tự động hóa quy trình nghiệp vụ.</li>
+                            <li>Đào tạo nội bộ về ứng dụng A.I, tăng năng suất toàn diện.</li>
+                            <li>Dẫn dắt R&D ứng dụng <a href="https://orix.vn" target="_blank">OriX.vn</a>, rút ngắn thời gian R&D từ tuần xuống còn vài ngày.</li>
+                        </ul>
+                    </div>
+                     <div class="experience-category">
+                        <h5>Quản lý Đội ngũ UI/UX & Thiết kế</h5>
+                        <ul>
+                            <li>Quản lý, đào tạo và định hướng phát triển cho đội ngũ UI/UX Designer.</li>
+                            <li>Dẫn dắt thiết kế CRM nội bộ (My NextPay) và Landing Pages, cải thiện lead generation ~25%.</li>
+                        </ul>
+                    </div>
+                    <div class="experience-category">
+                        <h5>Nghiên cứu & Phát triển Phần cứng (R&D Hardware)</h5>
+                        <ul>
+                            <li>Chủ trì nghiên cứu và thiết kế sản phẩm phần cứng Loa Tingbox Pro.</li>
+                        </ul>
+                    </div>
+                </div>
+            </section>
+            
+            <!-- Hệ Sinh Thái Sản Phẩm -->
+            <section id="portfolio" class="bento-box portfolio">
+                <h3>Hệ Sinh Thái Sản Phẩm</h3>
+                <div class="grid-layout">
+                    <div class="portfolio-item"><h4>Giải pháp Thanh toán</h4><p><a href="https://mpos.vn" target="_blank">mPOS.vn</a>, <a href="https://tingbox.vn" target="_blank">Tingbox.vn</a>, <a href="https://payon.vn" target="_blank">PayOn.vn</a>, Vimo.vn</p></div>
+                    <div class="portfolio-item"><h4>Quản lý Merchant</h4><p><a href="https://play.google.com/store/apps/details?id=com.vimo.mpos" target="_blank">mPOS digital</a>, mPOS360</p></div>
+                    <div class="portfolio-item"><h4>Sản phẩm A.I & Affiliate</h4><p><a href="https://orix.vn" target="_blank">OriX.vn</a></p></div>
+                    <div class="portfolio-item"><h4>Hệ thống Nội bộ</h4><p>My NextPay (CRM)</p></div>
+                    <div class="portfolio-item"><h4>Sản phẩm Phần cứng</h4><p>Loa Tingbox Pro</p></div>
+                    <div class="portfolio-item"><h4>Luồng thanh toán</h4><p>Click to pay, Tap to pay (Visa/Mastercard)</p></div>
+                </div>
+            </section>
+
+            <!-- Kỹ Năng -->
+            <section id="skills-pro" class="bento-box skills-pro">
+                <h3>Kỹ Năng Chuyên Môn</h3>
+                <p>Product Strategy, Product Lifecycle Management, UI/UX Design, UX Research, Wireframing & Prototyping, Team Leadership, UX Writing, Hardware R&D, Agile Methodologies.</p>
+            </section>
+            <section id="skills-tech" class="bento-box skills-tech">
+                <h3>Kỹ Thuật & Công Cụ</h3>
+                <p>Generative A.I (Gemini, ChatGPT, Grok, Suno), Prompt Engineering, Figma, Sketch, HTML5, CSS3, Bootstrap.</p>
+            </section>
+            <section id="skills-soft" class="bento-box skills-soft">
+                <h3>Kỹ Năng Mềm</h3>
+                 <ul>
+                    <li>Thấu hiểu người dùng sâu sắc</li>
+                    <li>Tư duy logic và hệ thống</li>
+                    <li>Lãnh đạo & Đào tạo đội ngũ</li>
+                    <li>Tự nghiên cứu & Triển khai độc lập</li>
+                </ul>
+            </section>
+            
+            <!-- Học Vấn -->
+            <section id="education" class="bento-box education">
+                <h3>Học Vấn & Đào Tạo</h3>
+                 <div class="grid-layout">
+                    <div class="education-item"><h4>Đào tạo & Ứng dụng A.I</h4><p>Tự học, nghiên cứu & Giảng viên nội bộ tại NextPay.</p></div>
+                    <div class="education-item"><h4>UI/UX & Phát triển Sản phẩm</h4><p>Tự học, nghiên cứu & Giảng viên/Tư vấn tại T3H.</p></div>
+                    <div class="education-item"><h4>Kỹ thuật & Thiết kế</h4><p>Chứng chỉ Thiết kế Đồ hoạ (CĐ Hoa Sen) & Tự học code.</p></div>
+                    <div class="education-item"><h4>Học vấn Chính quy</h4><p>Thư ký Văn phòng Đối ngoại (Học viện Ngoại giao).</p></div>
+                </div>
+            </section>
+
+        </div>
+    </main>
+    
+    <footer>
+        <div class="container">
+            <p>Thiết kế và phát triển bởi Trần Đức Anh & Gemini. <br>Một minh chứng cho sự hợp tác giữa Con người và A.I.</p>
+        </div>
+    </footer>
+
+    <script>
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('is-visible');
+                    // Optional: unobserve after first intersection
+                    // observer.unobserve(entry.target);
+                }
+            });
+        }, {
+            threshold: 0.1 // Trigger when 10% of the element is visible
+        });
+
+        const bentoBoxes = document.querySelectorAll('.bento-box');
+        bentoBoxes.forEach(box => {
+            observer.observe(box);
+        });
+        
+        // Parallax for Hero section
+        const hero = document.querySelector('.hero');
+        window.addEventListener('scroll', () => {
+            const scrollY = window.scrollY;
+            if (hero && scrollY < window.innerHeight) {
+                 // Fades out over the first 500px of scroll
+                const opacity = Math.max(0, 1 - scrollY / 500); 
+                // Moves down at a slower speed
+                const yPos = scrollY * 0.4;
+                hero.style.opacity = opacity;
+                hero.style.transform = `translateY(${yPos}px)`;
+            }
+        });
+    </script>
+</body>
+</html>
+
